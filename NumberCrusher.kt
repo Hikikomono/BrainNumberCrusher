@@ -5,8 +5,6 @@ fun main() {
 }
 
 fun game() {
-    //gameloop
-    
     var gesuchtArray = genFourDigitNum()//arrayOf<Int>(5, 6, 9, 7)
     var eingabeArray: String //oder array size 4 -> Array(4){i->i}
     var resultArray = Array(4) { int -> int } //wird number coded ergebnisse erhalten
@@ -27,11 +25,8 @@ fun game() {
             if (eingabeArray.toLowerCase() == "q")
                 exitProcess(1)
 
-            if (checkCorrectInput(eingabeArray))
-                if (checkDigitAmt(eingabeArray))
-                    if (checkStringUnique(eingabeArray))
-                        break
-        } while (true)
+        } while (!(checkCorrectInput(eingabeArray) && checkDigitAmt(eingabeArray)
+                    && checkStringUnique(eingabeArray)))
 
         for (pos in 0..3) { //vergleicht elem[x] in eingabe mit elem in lösung[x]
             var result: Int = 0
@@ -47,7 +42,6 @@ fun game() {
             }
             resultArray[pos] = result
         }
-
         resultArray = resultArray.sortedArrayDescending() //sorting array for proper result-print
 
 
@@ -82,12 +76,12 @@ fun checkStringUnique(numberInput: String): Boolean {
 fun genFourDigitNum(): Array<Int> {
     //TODO generiert teilweise 3 digit zahlen
     //generate 4 digit number with distinct digits
-    var num: Int
+    var num: String
 
     do {
-        num = (Math.random() * 10000).toInt()
+        num = (Math.random() * 10000).toInt().toString()
         //println("generated: $num")
-    } while (num.toString().length != num.toString().toList().distinct().size)
+    } while (num.length != num.toList().distinct().size)
 
     //jetz wirds hässlich, aber ich habe den core code als erstes implementiert und muss hiermit trixen
     var numArray = Array<Int>(4) { int -> int }
@@ -95,8 +89,7 @@ fun genFourDigitNum(): Array<Int> {
 
     for (index in 0..3)
         numArray[index] = numString[index].toString().toInt()
-
-
+    
     return numArray
 }
 
