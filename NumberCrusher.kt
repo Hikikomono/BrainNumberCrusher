@@ -5,6 +5,8 @@ fun main() {
 }
 
 fun game() {
+    //gameloop
+    
     var gesuchtArray = genFourDigitNum()//arrayOf<Int>(5, 6, 9, 7)
     var eingabeArray: String //oder array size 4 -> Array(4){i->i}
     var resultArray = Array(4) { int -> int } //wird number coded ergebnisse erhalten
